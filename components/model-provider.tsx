@@ -1,6 +1,5 @@
 "use client"
 
-import { disableInstantTransitions } from "framer-motion";
 import { useEffect, useState } from "react"
 import { ProModal } from "@/components/pro-model";
 

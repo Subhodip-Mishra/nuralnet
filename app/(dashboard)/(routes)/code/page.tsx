@@ -18,6 +18,7 @@ import ReactMarkdown from 'react-markdown';
 import { UserAvater } from "@/components/user-avater";
 import { BotAvater } from "@/components/bot-avater";
 import { ProModal } from "@/components/pro-model";
+import { useProModel } from '@/hooks/use-pro-model';
 
 interface FormValues {
   prompt: string;
@@ -30,8 +31,8 @@ interface Message {
 
 const CodePage = () => {
   const [message, setMessage] = useState<Message[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const router = useRouter();
+  const { isOpen, onOpen, onClose } = useProModel();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(forSchema),
@@ -54,7 +55,7 @@ const CodePage = () => {
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
-        setIsModalOpen(true); // Open the modal
+        onOpen(); // Open the modal using Zustand store
       }
       console.log(error);
     } finally {
@@ -144,16 +145,11 @@ const CodePage = () => {
           </Form>
         </div>
       </div>
-
-      {isModalOpen && (
-        <ProModal onClose={() => setIsModalOpen(false)} />
-      )}
     </>
   );
 };
 
 export default CodePage;
-
 
 
 
