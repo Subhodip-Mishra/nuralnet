@@ -30,7 +30,7 @@ const ConversationPage = () => {
     setTimeout(() => setIsClicked(false), 200);
   };
 
-  const [message, setMessage] = useState<ChatCompletionRequestMessage[]>([]);
+  // const [message, setMessage] = useState<ChatCompletionRequestMessage[]>([]);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof forSchema>>({
@@ -40,7 +40,7 @@ const ConversationPage = () => {
     }
   });
 
-  const [conversation, setConversation] = useState<ConversationItem[]>([]);
+  const [conversation, setConversation] = useState([]);
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof forSchema>) => {
     try {
@@ -127,7 +127,7 @@ const ConversationPage = () => {
               />
             </div>
           )}
-          {conversation.map((message, index) => (
+          {/* {conversation.map((message, index) => (
             <div key={index}
               className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg",
                 message.role === "user" ? "bg-white border border-black/10" : "bg-muted"
@@ -137,7 +137,7 @@ const ConversationPage = () => {
                 {message.content}
               </p>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </>

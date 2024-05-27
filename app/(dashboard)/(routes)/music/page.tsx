@@ -35,7 +35,7 @@ const MusicPage = () => {
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof forSchema>) => {
     try {
-      setMusic(undefined);
+      // setMusic(undefined);
       const response = await axios.post("/api/music", values)
       setMusic(response.data.audio);
 
