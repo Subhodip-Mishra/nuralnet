@@ -135,115 +135,115 @@ const CodePage = () => {
 export default CodePage;
 
 
- 'use client';
+//  'use client';
 
- import React, { useState } from 'react';
- import { ArrowUp, PenBox } from 'lucide-react';
- import { HeroSection } from '@/components/HeroSection';
- import { UserButton } from '@clerk/nextjs';
- import axios from 'axios';
- import { v4 as uuidv4 } from 'uuid';
+//  import React, { useState } from 'react';
+//  import { ArrowUp, PenBox } from 'lucide-react';
+//  import { HeroSection } from '@/components/HeroSection';
+//  import { UserButton } from '@clerk/nextjs';
+//  import axios from 'axios';
+//  import { v4 as uuidv4 } from 'uuid';
 
- type Message = {
-   id: string;
-   role: 'user' | 'assistant';
-   content: string;
- };
+//  type Message = {
+//    id: string;
+//    role: 'user' | 'assistant';
+//    content: string;
+//  };
 
- const CodePage = () => {
-   const [messages, setMessages] = useState<Message[]>([]);
-   const [inputText, setInputText] = useState('');
+//  const CodePage = () => {
+//    const [messages, setMessages] = useState<Message[]>([]);
+//    const [inputText, setInputText] = useState('');
 
-   const handleSendMessage = async (event: React.FormEvent) => {
-     event.preventDefault();
+//    const handleSendMessage = async (event: React.FormEvent) => {
+//      event.preventDefault();
 
-     if (inputText.trim() === '') return;
+//      if (inputText.trim() === '') return;
 
-     const userMessage: Message = { id: uuidv4(), role: 'user', content: inputText };
-     setInputText('');
-     setMessages([...messages, userMessage]);
+//      const userMessage: Message = { id: uuidv4(), role: 'user', content: inputText };
+//      setInputText('');
+//      setMessages([...messages, userMessage]);
 
-     try {
-       const response = await axios.post('/api/code', {
-         messages: [...messages, userMessage],
-       });
+//      try {
+//        const response = await axios.post('/api/code', {
+//          messages: [...messages, userMessage],
+//        });
 
-       const aiMessage: Message = { id: uuidv4(), role: 'assistant', content: response.data.text };
-       setMessages([...messages, userMessage, aiMessage]);
-     } catch (error) {
-       console.error('Error sending message:', error);
-     }
-   };
+//        const aiMessage: Message = { id: uuidv4(), role: 'assistant', content: response.data.text };
+//        setMessages([...messages, userMessage, aiMessage]);
+//      } catch (error) {
+//        console.error('Error sending message:', error);
+//      }
+//    };
 
-   return (
-     <div className="App text-center flex bg-[#282c34] absolute top-0 bottom-0 right-0 left-0">
-       <aside className="sidemenu bg-gray-950 w-[260px] p-4 px-3 text-end border-1">
-         <div className="grow overflow-hidden text-sm sidemenubutton p-1 pb-1 text-white hover:bg-zinc-800 group flex h-10 items-center gap-2 rounded-lg px-2 font-semibold">
-           <div className="gap-2">
-             <img
-               src="/chatgpt.jpg"
-               className="group flex h-8 w-8 items-center rounded-full bg-token-sidebar-surface-primary px-0 py-0 font-medium hover:bg-token-sidebar-surface-secondary transition-opacity"
-               style={{ marginRight: '0px' }}
-               alt="ChatGPT"
-             />
-           </div>
-           New chat
-           <div className="flex items-center justify-center" style={{ marginLeft: '80px' }}>
-             <PenBox size={17} />
-           </div>
-         </div>
-       </aside>
-       <section className="chatbox relative flex-1 border-solid border-zinc-800 bg-[#212121]">
-         <div className="flex items-center gap-2 py-4 justify-center top-2">
-           <HeroSection />
-         </div>
+//    return (
+//      <div className="App text-center flex bg-[#282c34] absolute top-0 bottom-0 right-0 left-0">
+//        <aside className="sidemenu bg-gray-950 w-[260px] p-4 px-3 text-end border-1">
+//          <div className="grow overflow-hidden text-sm sidemenubutton p-1 pb-1 text-white hover:bg-zinc-800 group flex h-10 items-center gap-2 rounded-lg px-2 font-semibold">
+//            <div className="gap-2">
+//              <img
+//                src="/chatgpt.jpg"
+//                className="group flex h-8 w-8 items-center rounded-full bg-token-sidebar-surface-primary px-0 py-0 font-medium hover:bg-token-sidebar-surface-secondary transition-opacity"
+//                style={{ marginRight: '0px' }}
+//                alt="ChatGPT"
+//              />
+//            </div>
+//            New chat
+//            <div className="flex items-center justify-center" style={{ marginLeft: '80px' }}>
+//              <PenBox size={17} />
+//            </div>
+//          </div>
+//        </aside>
+//        <section className="chatbox relative flex-1 border-solid border-zinc-800 bg-[#212121]">
+//          <div className="flex items-center gap-2 py-4 justify-center top-2">
+//            <HeroSection />
+//          </div>
 
-         <div className="chat-log p-11 px-20 lg:px-30 text-left rounded-full flex flex-col">
-         <img className='flex items-center justify-center '  src="favicon.ico" alt="" />
+//          <div className="chat-log p-11 px-20 lg:px-30 text-left rounded-full flex flex-col">
+//          <img className='flex items-center justify-center '  src="favicon.ico" alt="" />
 
-           {messages.map((message) => (
-             <div className={`chat-message ${message.role === 'assistant' ? 'chatgpt' : ''}`} key={message.id}>
-               <div className="chat-center pb-10 ml-auto mr-auto flex p-2 pl-11 pr-5">
-                 <div className={`avatar flex rounded-full w-7 h-7 ${message.role === 'assistant' ? 'bg-white' : ''}`}>
-                   {message.role === 'assistant' ? (
-                     <img src="/chatgpt.jpg" className="rounded-full border" alt="AI" />
-                   ) : (
-                     <UserButton afterSignOutUrl="/" />
-                   )}
-                 </div>
-                 <div className="User">
-                   <div className="text-white font-bold text-md px-3">
-                     {message.role === 'assistant' ? 'NuralNet' : 'You'}
-                   </div>
-                   <div className="message text-white pl-3 pr-5">{message.content}</div>
-                 </div>
-               </div>
-             </div>
-           ))}
-         </div>
+//            {messages.map((message) => (
+//              <div className={`chat-message ${message.role === 'assistant' ? 'chatgpt' : ''}`} key={message.id}>
+//                <div className="chat-center pb-10 ml-auto mr-auto flex p-2 pl-11 pr-5">
+//                  <div className={`avatar flex rounded-full w-7 h-7 ${message.role === 'assistant' ? 'bg-white' : ''}`}>
+//                    {message.role === 'assistant' ? (
+//                      <img src="/chatgpt.jpg" className="rounded-full border" alt="AI" />
+//                    ) : (
+//                      <UserButton afterSignOutUrl="/" />
+//                    )}
+//                  </div>
+//                  <div className="User">
+//                    <div className="text-white font-bold text-md px-3">
+//                      {message.role === 'assistant' ? 'NuralNet' : 'You'}
+//                    </div>
+//                    <div className="message text-white pl-3 pr-5">{message.content}</div>
+//                  </div>
+//                </div>
+//              </div>
+//            ))}
+//          </div>
 
-           <div className="chatinputholder absolute left-0 right-0 bottom-0 p-1">
-             <form onSubmit={handleSendMessage}>
-               <textarea
-                 rows={1}
-                 value={inputText}
-                 onChange={(e) => setInputText(e.target.value)}
-                 className="chatinputtext bg-[#212121] w-9/12 border border-shadow border-zinc-600 rounded-md p-4 outline-none text-white text-sm"
-                 placeholder="message NuralNet"
-               />
-               <button
-                 type="submit"
-                 className="text-zinc-300 rounded-lg border border-none bg-black p-2 md:p-3 h-8 md:h-10 w-8 md:w-10"
-               >
-                 <ArrowUp size={16} />
-               </button>
-             </form>
-           </div>
-       </section>
-     </div>
-   );
- };
+//            <div className="chatinputholder absolute left-0 right-0 bottom-0 p-1">
+//              <form onSubmit={handleSendMessage}>
+//                <textarea
+//                  rows={1}
+//                  value={inputText}
+//                  onChange={(e) => setInputText(e.target.value)}
+//                  className="chatinputtext bg-[#212121] w-9/12 border border-shadow border-zinc-600 rounded-md p-4 outline-none text-white text-sm"
+//                  placeholder="message NuralNet"
+//                />
+//                <button
+//                  type="submit"
+//                  className="text-zinc-300 rounded-lg border border-none bg-black p-2 md:p-3 h-8 md:h-10 w-8 md:w-10"
+//                >
+//                  <ArrowUp size={16} />
+//                </button>
+//              </form>
+//            </div>
+//        </section>
+//      </div>
+//    );
+//  };
 
- export default CodePage;
+//  export default CodePage;
 
 
