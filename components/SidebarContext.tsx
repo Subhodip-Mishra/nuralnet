@@ -1,9 +1,23 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
-const SideBarContext = createContext({ expanded: true, setExpanded: () => {} });
+// Define the type for the context value
+interface SideBarContextType {
+  expanded: boolean;
+  setExpanded: Dispatch<SetStateAction<boolean>>;
+}
 
-export const SideBarProvider = ({ children }) => {
-  const [expanded, setExpanded] = useState(true);
+// Initialize the context with a default value
+const SideBarContext = createContext<SideBarContextType | undefined>(undefined);
+
+// Define the props type for the provider
+interface SideBarProviderProps {
+  children: ReactNode;
+}
+
+// Create the provider component
+export const SideBarProvider: React.FC<SideBarProviderProps> = ({ children }) => {
+  const [expanded, setExpanded] = useState<boolean>(true);
+
   return (
     <SideBarContext.Provider value={{ expanded, setExpanded }}>
       {children}
@@ -11,4 +25,11 @@ export const SideBarProvider = ({ children }) => {
   );
 };
 
-export const useSideBarContext = () => useContext(SideBarContext);
+// Custom hook to use the SideBarContext
+export const useSideBarContext = (): SideBarContextType => {
+  const context = useContext(SideBarContext);
+  if (context === undefined) {
+    throw new Error('useSideBarContext must be used within a SideBarProvider');
+  }
+  return context;
+};
