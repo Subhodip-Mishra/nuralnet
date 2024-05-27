@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { forSchema } from "./constants";
-import Empty from "@/components/empty";
+import Empty from "@/components/Empty";
 import Heading from '@/components/heading';
 import Loader from "@/components/loader";
 import axios from "axios";
