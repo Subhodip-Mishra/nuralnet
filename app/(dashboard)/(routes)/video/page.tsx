@@ -20,7 +20,7 @@ const VideoPage = () => {
   const proModal = useProModel();
 
   const router = useRouter();
-  const [video, setVideo] = useState<string>([]);
+  // const [video, setVideo] = useState<string>([]);
 
   const form = useForm<z.infer<typeof forSchema>>({
     resolver: zodResolver(forSchema),
@@ -34,7 +34,7 @@ const VideoPage = () => {
     try {
       // setVideo(undefined);
       const response = await axios.post("/api/video", values)
-      setVideo(response.data[0]);
+      // setVideo(response.data[0]);
 
       form.reset();
     } catch (error:any) {
@@ -89,7 +89,7 @@ const VideoPage = () => {
               <Loader />
             </div>
           )}
-          {!video && !isLoading && (
+          {/* {!video && !isLoading && (
             <div>
               <Empty
                 lable="no video generated."
@@ -100,7 +100,7 @@ const VideoPage = () => {
             <video className="w-[50%] aspect-video mt-8 rounded-lg border bg-black" controls>
               <source src={video}/>
             </video>
-          )}             
+          )}              */}
         </div>
       </div>
     </>
