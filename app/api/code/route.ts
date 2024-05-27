@@ -48,7 +48,7 @@ export async function POST(
         
         await increaseapiLimit();
 
-        return NextResponse.json(response.data.choices[0].message);
+        // return NextResponse.json(response.data.choices[0].message);
     }
     catch(error){
         console.log("[CODE_ERROR", error)

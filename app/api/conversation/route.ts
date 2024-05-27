@@ -3,11 +3,11 @@ import { NextResponse } from 'next/server';
 // import { Configuration, OpenAIApi} from 'openai';
 import { checkApiLimit, increaseapiLimit } from '@/lib/api-limit';
 
-const  configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// const  configuration = new Configuration({
+//     apiKey: process.env.OPENAI_API_KEY,
+// });
 
-const openai = new OpenAIApi(configuration);
+// const openai = new OpenAIApi(configuration);
 
 export async function POST(
     req: Request
@@ -21,9 +21,9 @@ export async function POST(
             return new NextResponse("Unauthorized", {status: 401})
         }
 
-        if(!configuration.apiKey){
-            return new NextResponse("OpneAI API key not configured", {status: 500})
-        }
+        // if(!configuration.apiKey){
+        //     return new NextResponse("OpneAI API key not configured", {status: 500})
+        // }
 
         if(!message){
             return new NextResponse("Mesages are required", {status: 400})
@@ -34,14 +34,14 @@ export async function POST(
         if(!freeTrial){
             return new NextResponse("Free trial has expired.", {status: 403})
         }
-        const response = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            message
-        })
+        // const response = await openai.createChatCompletion({
+        //     model: "gpt-3.5-turbo",
+        //     message
+        // })
         
         await increaseapiLimit();
 
-        return NextResponse.json(response.data.choices[0].message);
+        // return NextResponse.json(response.data.choices[0].message);
     }
     catch(error){
         console.log("[CONVERSATION_ERROR", error)

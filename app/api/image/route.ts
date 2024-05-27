@@ -6,11 +6,11 @@ import { checkApiLimit, increaseapiLimit } from '@/lib/api-limit';
 
 
 
-const  configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// const  configuration = new Configuration({
+//     apiKey: process.env.OPENAI_API_KEY,
+// });
 
-const openai = new OpenAI(configuration);
+// const openai = new OpenAI(configuration);
 
 export async function POST(
     req: Request
@@ -24,9 +24,9 @@ export async function POST(
             return new NextResponse("Unauthorized", {status: 401})
         }
 
-        if(!configuration.apiKey){
-            return new NextResponse("OpneAI API key not configured", {status: 500})
-        }
+        // if(!configuration.apiKey){
+        //     return new NextResponse("OpneAI API key not configured", {status: 500})
+        // }
 
         if(!prompt){
             return new NextResponse("Prompt is required", {status: 400})
@@ -44,15 +44,15 @@ export async function POST(
         }
 
 
-        const response = await openai.createImage({
-            prompt,
-            n: parseInt(amount, 10),
-            size: resolution
-        })
+        // const response = await openai.createImage({
+        //     prompt,
+        //     n: parseInt(amount, 10),
+        //     size: resolution
+        // })
 
         await increaseapiLimit()
 
-        return NextResponse.json(response.data.data);
+        // return NextResponse.json(response.data.data);
     }
     catch(error){
         console.log("[Image_ERROR", error)
