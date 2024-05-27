@@ -17,6 +17,7 @@ import axios from "axios";
 import ReactMarkdown from 'react-markdown';
 import { UserAvater } from "@/components/user-avater";
 import { BotAvater } from "@/components/bot-avater";
+import { proModal } from "@/components/pro-model";
 
 const CodePage = () => {
   const [message, setMessage] = useState([]);
@@ -29,21 +30,35 @@ const CodePage = () => {
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = async (values) => {
+  interface FormValues {
+    prompt: string;
+  }
+  
+  interface Message {
+    role: string;
+    content: string;
+  }
+  
+  const onSubmit = async (values: FormValues) => {
+    const router = useRouter();
+    const [message, setMessage] = useState<Message[]>([]);
+    const form = useForm<FormValues>();
+  
     try {
-      const userMessage = {
+      const userMessage: Message = {
         role: "user",
         content: values.prompt,
       };
-
-      const newMessages = [...message, userMessage];
+  
+      const newMessages: Message[] = [...message, userMessage];
       const response = await axios.post("/api/code", { message: newMessages });
+  
       setMessage(current => [...current, userMessage, response.data]);
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       if (error?.response?.status === 403) {
-        proModal.onOpen();
-      }  
+        proModal.onOpen(); // Ensure `proModal` is defined and has `onOpen` method
+      }
       console.log(error);
     } finally {
       router.refresh();

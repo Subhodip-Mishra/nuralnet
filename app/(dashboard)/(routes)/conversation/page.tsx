@@ -30,8 +30,8 @@ const ConversationPage = () => {
     setTimeout(() => setIsClicked(false), 200);
   };
 
-  const [message, setMessage] = useState<ChatCompletionRequestMessage[]>([]);
-  const router = useRouter();
+  // const [message, setMessage] = useState<ChatCompletionRequestMessage[]>([]);
+  // const router = useRouter();
 
   const form = useForm<z.infer<typeof forSchema>>({
     resolver: zodResolver(forSchema),
@@ -40,21 +40,21 @@ const ConversationPage = () => {
     }
   });
 
-  const [conversation, setConversation] = useState<ConversationItem[]>([]);
+  // const [conversation, setConversation] = useState<ConversationItem[]>([]);
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof forSchema>) => {
     try {
-      const userMessage: ChatCompletionRequiestMessage = {
-        role: "user",
-        content: values.prompt,
-      };
+      // const userMessage: ChatCompletionRequiestMessage = {
+      //   role: "user",
+      //   content: values.prompt,
+      // };
 
-      const newMessages = [...message, userMessage]
-      const response = await axios.post("/api/conversation", {
-        message: newMessages,
-      });
+      // const newMessages = [...message, userMessage]
+      // const response = await axios.post("/api/conversation", {
+      //   message: newMessages,
+      // });
 
-      setMessage((current) => [...current, userMessage, response.data]);
+      // setMessage((current) => [...current, userMessage, response.data]);
 
       form.reset();
     } catch (error:any) {
