@@ -1,6 +1,6 @@
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-import { Configuration, OpenAIApi} from 'openai';
+// import { Configuration, OpenAIApi} from 'openai';
 import { checkApiLimit, increaseapiLimit } from '@/lib/api-limit';
 
 const  configuration = new Configuration({

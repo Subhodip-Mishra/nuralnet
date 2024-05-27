@@ -1,20 +1,20 @@
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-import { Configuration, OpenAIApi} from 'openai';
-import {ChatCompletionRequestMessage} from 'openai'
+// import { Configuration, OpenAIApi} from 'openai';
+// import {ChatCompletionRequestMessage} from 'openai'
 import { checkApiLimit, increaseapiLimit } from '@/lib/api-limit';
 
-const  configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// const  configuration = new Configuration({
+//     apiKey: process.env.OPENAI_API_KEY,
+// });
 
-const instructionMessage: ChatCompletionRequestMessage = {
-    role: "system",
-    content: "You are a code generator. You must answer only in markdown code snippets Use code comments for explanations. When write then please notedown example"
+// const instructionMessage: ChatCompletionRequestMessage = {
+//     role: "system",
+//     content: "You are a code generator. You must answer only in markdown code snippets Use code comments for explanations. When write then please notedown example"
    
-}
+// }
 
-const openai = new OpenAI(configuration);
+// const openai = new OpenAI(configuration);
 
 export async function POST(
     req: Request
@@ -28,9 +28,9 @@ export async function POST(
             return new NextResponse("Unauthorized", {status: 401})
         }
 
-        if(!configuration.apiKey){
-            return new NextResponse("OpneAI API key not configured", {status: 500})
-        }
+        // if(!configuration.apiKey){
+        //     return new NextResponse("OpneAI API key not configured", {status: 500})
+        // }
 
         if(!message){
             return new NextResponse("Mesages are required", {status: 400})
@@ -41,10 +41,10 @@ export async function POST(
             return new NextResponse("Free trial has expired.", {status: 403})
         }
 
-        const response = await openai.completions({
-            model: "gpt-3.5-turbo",
-            message: [instructionMessage, ...message]
-        })
+        // const response = await openai.completions({
+        //     model: "gpt-3.5-turbo",
+        //     message: [instructionMessage, ...message]
+        // })
         
         await increaseapiLimit();
 
