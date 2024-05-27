@@ -1,51 +1,51 @@
-// import { auth } from '@clerk/nextjs';
-// import { NextResponse } from 'next/server';
-// import { Configuration, OpenAIApi} from 'openai';
-// import { checkApiLimit, increaseapiLimit } from '@/lib/api-limit';
+import { auth } from '@clerk/nextjs';
+import { NextResponse } from 'next/server';
+import { Configuration, OpenAIApi} from 'openai';
+import { checkApiLimit, increaseapiLimit } from '@/lib/api-limit';
 
-// const  configuration = new Configuration({
-//     apiKey: process.env.OPENAI_API_KEY,
-// });
+const  configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
-// const openai = new OpenAIApi(configuration);
+const openai = new OpenAIApi(configuration);
 
-// export async function POST(
-//     req: Request
-// ) {
-//     try{
-//         const { userId } = auth();
-//         const body = await req.json();
-//         const { message } = body;
+export async function POST(
+    req: Request
+) {
+    try{
+        const { userId } = auth();
+        const body = await req.json();
+        const { message } = body;
         
-//         if(!userId){
-//             return new NextResponse("Unauthorized", {status: 401})
-//         }
+        if(!userId){
+            return new NextResponse("Unauthorized", {status: 401})
+        }
 
-//         if(!configuration.apiKey){
-//             return new NextResponse("OpneAI API key not configured", {status: 500})
-//         }
+        if(!configuration.apiKey){
+            return new NextResponse("OpneAI API key not configured", {status: 500})
+        }
 
-//         if(!message){
-//             return new NextResponse("Mesages are required", {status: 400})
-//         }
+        if(!message){
+            return new NextResponse("Mesages are required", {status: 400})
+        }
 
-//         const freeTrial = await checkApiLimit();
+        const freeTrial = await checkApiLimit();
 
-//         if(!freeTrial){
-//             return new NextResponse("Free trial has expired.", {status: 403})
-//         }
-//         const response = await openai.createChatCompletion({
-//             model: "gpt-3.5-turbo",
-//             message
-//         })
+        if(!freeTrial){
+            return new NextResponse("Free trial has expired.", {status: 403})
+        }
+        const response = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            message
+        })
         
-//         await increaseapiLimit();
+        await increaseapiLimit();
 
-//         return NextResponse.json(response.data.choices[0].message);
-//     }
-//     catch(error){
-//         console.log("[CONVERSATION_ERROR", error)
-//         return new NextResponse("Internal erro" , {status: 500})
+        return NextResponse.json(response.data.choices[0].message);
+    }
+    catch(error){
+        console.log("[CONVERSATION_ERROR", error)
+        return new NextResponse("Internal erro" , {status: 500})
         
-//     }
-// }
+    }
+}
