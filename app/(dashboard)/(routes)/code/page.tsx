@@ -17,47 +17,43 @@ import axios from "axios";
 import ReactMarkdown from 'react-markdown';
 import { UserAvater } from "@/components/user-avater";
 import { BotAvater } from "@/components/bot-avater";
-import { proModal } from "@/components/pro-model";
+import { ProModal } from "@/components/pro-model";
+
+interface FormValues {
+  prompt: string;
+}
+
+interface Message {
+  role: string;
+  content: string;
+}
 
 const CodePage = () => {
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState<Message[]>([]);
   const router = useRouter();
 
-  const form = useForm({
+  const form = useForm<FormValues>({
     resolver: zodResolver(forSchema),
     defaultValues: { prompt: "" }
   });
 
   const isLoading = form.formState.isSubmitting;
 
-  interface FormValues {
-    prompt: string;
-  }
-  
-  interface Message {
-    role: string;
-    content: string;
-  }
-  
   const onSubmit = async (values: FormValues) => {
-    const router = useRouter();
-    const [message, setMessage] = useState<Message[]>([]);
-    const form = useForm<FormValues>();
-  
     try {
       const userMessage: Message = {
         role: "user",
         content: values.prompt,
       };
-  
+
       const newMessages: Message[] = [...message, userMessage];
       const response = await axios.post("/api/code", { message: newMessages });
-  
+
       setMessage(current => [...current, userMessage, response.data]);
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
-        proModal.onOpen(); // Ensure `proModal` is defined and has `onOpen` method
+        ProModal.onOpen();
       }
       console.log(error);
     } finally {
@@ -77,40 +73,44 @@ const CodePage = () => {
         />
       </div>
 
-        <div className="space-y-4 mt-4 ">
-          {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-              <Loader />
-            </div>
-          )}
-          {message.length === 0 && !isLoading && (
-            <Empty label="NO conversation started" />
-          )}
-          <div className="flex flex-col-reverse gap-y-4">
-            {message.map((message) => (
-              <div
-                key={message.content}
-                className={cn("p-8 w-full flex items-center justify-center gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}
-              >
-                {message.role === "user" ? <UserAvater /> : <BotAvater />}
-                <ReactMarkdown
-                  components={{
-                    pre: ({ node, ...props }) => (
-                      <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
-                        <pre {...props} />
-                      </div>
-                    ),
-                    code: ({ node, ...props }) =>
-                      <code className="bg-black/10 rounded-lg p-1" {...props} />
-                  }}
-                >
-                  {message.content || ""}
-                </ReactMarkdown>
-              </div>
-            ))}
+      <div className="space-y-4 mt-4">
+        {isLoading && (
+          <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+            <Loader />
           </div>
+        )}
+        {message.length === 0 && !isLoading && (
+          <Empty label="NO conversation started" />
+        )}
+        <div className="flex flex-col-reverse gap-y-4">
+          {message.map((msg, index) => (
+            <div
+              key={index}
+              className={cn(
+                "p-8 w-full flex items-center justify-center gap-x-8 rounded-lg",
+                msg.role === "user" ? "bg-white border border-black/10" : "bg-muted"
+              )}
+            >
+              {msg.role === "user" ? <UserAvater /> : <BotAvater />}
+              <ReactMarkdown
+                components={{
+                  pre: ({ node, ...props }) => (
+                    <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+                      <pre {...props} />
+                    </div>
+                  ),
+                  code: ({ node, ...props }) => (
+                    <code className="bg-black/10 rounded-lg p-1" {...props} />
+                  ),
+                }}
+              >
+                {msg.content || ""}
+              </ReactMarkdown>
+            </div>
+          ))}
         </div>
-      <div className='px-4 lg:px-8 '>
+      </div>
+      <div className="px-4 lg:px-8">
         <div>
           <Form {...form}>
             <form
@@ -123,7 +123,7 @@ const CodePage = () => {
                   <FormItem className="col-span-12 lg:col-span-10 gap-2">
                     <FormControl className="m-0 p-2">
                       <Input
-                        className="border-0 outline-none focus-visible: ring-0 focus-visible: ring-transparent"
+                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
                         placeholder="Simple toggle button using react hooks."
                         {...field}
@@ -144,10 +144,11 @@ const CodePage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default CodePage;
+
 
 
 //  'use client';
