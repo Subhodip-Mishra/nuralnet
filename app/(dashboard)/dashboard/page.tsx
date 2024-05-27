@@ -3,24 +3,10 @@ import { cn } from "@/lib/utils";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { ArrowRight, CodeIcon, ImageIcon, MessageSquare, Music, VideoIcon } from "lucide-react";
-import {
-  CardContainer,
-  CardBody,
-  CardItem
-} from "@/components/ui/3d-card";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import RightSidebar from "@/components/Right-sidebar";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+
 
 
 const tools = [
