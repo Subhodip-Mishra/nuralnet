@@ -23,7 +23,7 @@ const MusicPage = () => {
   const proModal = useProModel();
 
   const router = useRouter();
-  const [music, setMusic] = useState<string>([]);
+  // const [music, setMusic] = useState<string>([]);
 
   const form = useForm<z.infer<typeof forSchema>>({
     resolver: zodResolver(forSchema),
@@ -37,7 +37,7 @@ const MusicPage = () => {
     try {
       // setMusic(undefined);
       const response = await axios.post("/api/music", values)
-      setMusic(response.data.audio);
+      // setMusic(response.data.audio);
 
       form.reset();
     } catch (error:any) {
@@ -92,7 +92,7 @@ const MusicPage = () => {
               <Loader />
             </div>
           )}
-          {!music && !isLoading && (
+          {/* {!music && !isLoading && (
             <div>
               <Empty
                 lable="No Music generated"
@@ -103,7 +103,7 @@ const MusicPage = () => {
             <audio controls className="w-full mt-8">
               <source src={music}/>
             </audio>
-          )}
+          )} */}
         </div>
       </div>
     </>
