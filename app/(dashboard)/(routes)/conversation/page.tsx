@@ -30,8 +30,8 @@ const ConversationPage = () => {
     setTimeout(() => setIsClicked(false), 200);
   };
 
-  // const [message, setMessage] = useState<ChatCompletionRequestMessage[]>([]);
-  // const router = useRouter();
+  const [message, setMessage] = useState<ChatCompletionRequestMessage[]>([]);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof forSchema>>({
     resolver: zodResolver(forSchema),
@@ -40,7 +40,7 @@ const ConversationPage = () => {
     }
   });
 
-  // const [conversation, setConversation] = useState<ConversationItem[]>([]);
+  const [conversation, setConversation] = useState<ConversationItem[]>([]);
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof forSchema>) => {
     try {

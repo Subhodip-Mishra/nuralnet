@@ -5,7 +5,7 @@ import axios from "axios";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { MessageSquare, Music, Music2Icon } from 'lucide-react';
+import { Music } from 'lucide-react';
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
