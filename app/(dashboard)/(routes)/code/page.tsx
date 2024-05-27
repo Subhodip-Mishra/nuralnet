@@ -30,6 +30,7 @@ interface Message {
 
 const CodePage = () => {
   const [message, setMessage] = useState<Message[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -53,7 +54,7 @@ const CodePage = () => {
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
-        ProModal.onOpen();
+        setIsModalOpen(true); // Open the modal
       }
       console.log(error);
     } finally {
@@ -143,11 +144,16 @@ const CodePage = () => {
           </Form>
         </div>
       </div>
+
+      {isModalOpen && (
+        <ProModal onClose={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 };
 
 export default CodePage;
+
 
 
 
