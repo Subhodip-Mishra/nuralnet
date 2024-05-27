@@ -9,7 +9,7 @@ import { MessageSquare, Music, Music2Icon, Video } from 'lucide-react';
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Empty from "@/components/empty";
+import Empty from "@/components/Empty";
 import Heading from '@/components/heading';
 import Loader from "@/components/loader";
 import { forSchema } from "./constants";

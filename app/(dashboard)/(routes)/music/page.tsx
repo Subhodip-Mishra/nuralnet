@@ -10,7 +10,7 @@ import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Empty from "@/components/empty";
+import Empty from "@/components/Empty";
 import Heading from '@/components/heading';
 import Loader from "@/components/loader";
 import { UserAvater } from "@/components/user-avater";
