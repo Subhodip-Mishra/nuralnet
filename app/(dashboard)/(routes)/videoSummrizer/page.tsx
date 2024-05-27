@@ -1,26 +1,26 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
-import { ToastAction } from "@/components/ui/toast"
+import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import {
     Document, Page, Text, View, StyleSheet, BlobProvider
 } from '@react-pdf/renderer';
-import { Heading } from '@/components/heading';
-import { ShoppingCart, Video } from 'lucide-react';
+import Heading from '@/components/heading';
+import { Video } from 'lucide-react';
 
-const VideoSummarizer = () => {
-    const [videoUrl, setVideoUrl] = useState('');
-    const [summary, setSummary] = useState('');
-    const [transcript, setTranscript] = useState('');
-    const [editMode, setEditMode] = useState(false);
-    const [editableSummary, setEditableSummary] = useState('');
-    const [loading, setLoading] = useState(false);
+const VideoSummarizer: React.FC = () => {
+    const [videoUrl, setVideoUrl] = useState<string>('');
+    const [summary, setSummary] = useState<string>('');
+    const [transcript, setTranscript] = useState<string>('');
+    const [editMode, setEditMode] = useState<boolean>(false);
+    const [editableSummary, setEditableSummary] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const { toast } = useToast();
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setVideoUrl(e.target.value);
     };
 
@@ -62,7 +62,7 @@ const VideoSummarizer = () => {
         });
     };
 
-    const PdfDocument = ({ content }) => {
+    const PdfDocument = ({ content }: { content: string }) => {
         const cleanContent = content.replace(/<\/?u>/g, ''); // Remove <u> tags from the content
 
         return (
@@ -80,13 +80,11 @@ const VideoSummarizer = () => {
         );
     };
 
-
-
-    const handleSummaryChange = (e) => {
+    const handleSummaryChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setEditableSummary(e.target.value);
     };
 
-    const formatSummary = (summaryText) => {
+    const formatSummary = (summaryText: string) => {
         const lines = summaryText.split('\n').filter(line => line.trim() !== "");
         const formattedLines = lines.map((line, index) => {
             if (line.startsWith('<u>')) {
@@ -106,30 +104,22 @@ const VideoSummarizer = () => {
                 // Change color for important code-related lines
                 return <p key={index} className="ml-4 text-blue-700 text-lg">{editMode ? editableSummary : line}</p>;
             } else {
-                // For regular text, apply different styles
-                const style = line.startsWith('<u>') ? styles.heading : styles.text;
-                return <p key={index} className="ml-4 text-lg" style={style}>{editMode ? editableSummary : line}</p>;
+                return <p key={index} className="ml-4 text-lg">{editMode ? editableSummary : line}</p>;
             }
         }).filter(line => line !== null); // Remove null lines
         return <div>{formattedLines}</div>;
     };
 
-
-
-
-
-
-
     return (
         <div className='container mx-auto px-4'>
             <div className='flex  px-[34%] mt-2 '>
-            <Heading
-            title='Video Summerizer'
-            description="Summerize your Video into Text."
-            icon={Video}
-            iconColor="text-blue-600"
-            bgColor="bg-red-500/10"
-            />
+                <Heading
+                    title='Video Summarizer'
+                    description="Summarize your video into text."
+                    icon={Video}
+                    iconColor="text-blue-600"
+                    bgColor="bg-red-500/10"
+                />
             </div>
             <div className='flex flex-col items-center justify-center mt-2'>
                 <input
@@ -199,7 +189,6 @@ const VideoSummarizer = () => {
                                             className='bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700'
                                             onClick={() => {
                                                 const link = document.createElement('a');
-                                                link.href = url;
                                                 link.download = 'summary.pdf';
                                                 document.body.appendChild(link);
                                                 link.click();
