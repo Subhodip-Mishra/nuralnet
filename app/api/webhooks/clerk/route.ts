@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     throw new Error(
       "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
     );
+    
   }
 
   // Get the headers
