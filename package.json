@@ -66,6 +66,7 @@
     "replicate": "^0.29.1",
     "simplex-noise": "^4.0.1",
     "studio": "^0.13.5",
+    "svix": "^1.24.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
