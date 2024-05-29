@@ -55,15 +55,20 @@ export const getApiLimitCount = async () => {
         return 0;
     }
 
-    const userApiLimit =   await prismadb.userApiLimit.findUnique({
-        where: {
-            userId
+    try {
+        const userApiLimit = await prismadb.userApiLimit.findUnique({
+            where: {
+                userId: userId
+            }
+        });
+
+        if (!userApiLimit) {
+            return 0;
         }
-    });
 
-    if (!userApiLimit) {
-        return 0;
+        return userApiLimit.count;
+    } catch (error) {
+        console.error("Error getting API limit count:", error);
+        return 0; 
     }
-
-    return userApiLimit.count;
 };
