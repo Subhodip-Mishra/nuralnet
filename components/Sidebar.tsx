@@ -80,16 +80,16 @@ const Sidebar: React.FC<SidebarProps> = ({ apiLimitCount, children }) => {
         <nav className='sidebar-nav'>
           <SignedIn>
             <ul className='sidebar-nav_elements'>
-              <div className='flex   flex-col gap-4 '>
-                <Link href="/" className='sidebar-logo'>
-                  <Image src="/assets/images/logo-text.svg" alt='logo' width={180} height={28} />
+              <div className='flex   flex-col gap-3 '>
+                <Link href="/" className='sidebar-logo left-3'>
+                  <Image src="/logo1.png" alt='logo' width={200} height={20} />
                 </Link>
               </div>
-              {navLinks.slice(0, 10).map((link) => {
+              {navLinks.slice(0, 6).map((link) => {
                 const isActive = link.route === pathname
 
                 return (
-                  <li key={link.route} className={`sidebar-nav_element group ${isActive ? "bg-purple-gradient text-white" : "text-gray-700"
+                  <li key={link.route} className={`sidebar-nav_element group ${isActive ? "bg-gradient-to-r from-yellow-300 to-orange-500  text-white" : "text-gray-700"
                     }`}>
                     <Link className='sidebar-link' href={link.route}>
                       <Image
@@ -107,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ apiLimitCount, children }) => {
             </ul>
 
             <ul className='sidebar-nav_elements'>
-            {navLinks.slice(10).map((link) => {
+            {navLinks.slice(6).map((link) => {
                 const isActive = link.route === pathname
 
                 return (

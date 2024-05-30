@@ -6,30 +6,11 @@ export const navLinks = [
       route: "/",
       icon: "/assets/icons/home.svg",
     },
-    {
-      label: "Conversation",
-      route: "/conversation",
-      icon: "/assets/icons/message.png",
-    },
-    {
-      label: "Code Generation",
-      route: "/code",
-      icon: "/assets/icons/code.png",
-    },
-    {
-      label: "Video Summerizer",
-      route: "/videoSummrizer",
-      icon: "/assets/icons/video.png",
-    },
-    {
-      label: "Image Generation",
-      route: "/image",
-      icon: "/assets/icons/picture.png",
-    },
+    
     {
       label: "Image Restore",
       route: "/transformations/add/restore",
-      icon: "/assets/icons/icons.svg",
+      icon: "/assets/icons/image.svg",
     },
     {
       label: "Generative Fill",
