@@ -36,11 +36,10 @@ const useSideBarContext = () => {
 };
 
 interface SidebarProps {
-  apiLimitCount: number;
   children?: ReactNode; // Make children optional
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ apiLimitCount, children }) => {
+const Sidebar: React.FC<SidebarProps> = ({  children }) => {
   const pathname = usePathname()
   const { expanded, setExpanded } = useSideBarContext();
 
@@ -81,8 +80,8 @@ const Sidebar: React.FC<SidebarProps> = ({ apiLimitCount, children }) => {
           <SignedIn>
             <ul className='sidebar-nav_elements'>
               <div className='flex   flex-col gap-3 '>
-                <Link href="/" className='sidebar-logo left-3'>
-                  <Image src="/logo1.png" alt='logo' width={200} height={20} />
+                <Link href="/" className='sidebar-logo ml-3'>
+                  <Image src="/logo1.png" alt='logo' width={150} height={28} />
                 </Link>
               </div>
               {navLinks.slice(0, 6).map((link) => {

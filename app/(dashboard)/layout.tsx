@@ -9,8 +9,7 @@ const DashBoardLayout = async ({ children }: { children: React.ReactNode }) => {
     <SideBarProvider>
       <div className="h-full">
         <div className="hidden h-full md:flex md:flex-col md:fixed md:inset-y-0 bg-gray-900">
-          <Sidebar />
-            {/* <Sidebar1 apiLimitCount={apiLimitCount} /> */}
+          <Sidebar  />
         </div>
         <main className="md:pl-72">
           <Navber />
