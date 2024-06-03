@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 
 import User from "@/lib/database/models/users.models"
 import { connectToDatabase } from "@/lib/database/Mongoose";
-import { handleError } from "../utils";
+import { handleError } from "@/lib/utils";
 
 // CREATE
 export async function createUser(user: CreateUserParams) {

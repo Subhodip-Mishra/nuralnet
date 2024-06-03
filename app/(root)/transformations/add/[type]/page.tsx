@@ -11,8 +11,8 @@
     const transformation = transformationTypes[type]
 
     // check here some issue face in clerk 
-    if(!userId) redirect('/sign-in')
-    const user = await getUserById(userId);
+    // if(!userId) redirect('/sign-in')
+    // const user = await getUserById(userId);
     return (
       <>
       <Header 
@@ -23,9 +23,9 @@
       <section className='mt-10'>
       <TransformationForm
       action='Add'
-      userId={user._id}
+      // userId={user._id}
       type={transformation.type as TransformationTypeKey}
-      creditBalance={user.creditBalance}
+      // creditBalance={user.creditBalance}
       />
       </section>
       </>
