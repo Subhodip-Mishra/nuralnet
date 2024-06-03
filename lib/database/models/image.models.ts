@@ -13,9 +13,13 @@ export interface IImage extends Document {
     aspectRatio?: string;
     color?: string;
     prompt?: string;
-    author?: Schema.Types.ObjectId;
-    createdAt: Date;
-    updatedAt: Date;
+    author?: {
+        _id: string,
+        firstName: string,
+        lastName: string
+    };
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 const ImageSchema = new Schema({
     title: {
