@@ -1,24 +1,33 @@
-import MobileNav from "@/components/MobileNav";
+import MobileNav from "@/components/shared/MobileNav";
 import Navber from "@/components/Navber";
-import Sidebar, { SideBarProvider } from "@/components/Sidebar";
-// import Sidebar1 from "@/components/Sidebar1";
-import { Toaster } from "@/components/ui/toaster";
+import Sidebar from "@/components/shared/Sidebar";
 
 const DashBoardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <SideBarProvider>
-      <div className="h-full">
-        <div className="hidden h-full md:flex md:flex-col md:fixed md:inset-y-0 bg-gray-900">
-          <Sidebar  />
-        </div>
-        <main className="md:pl-72">
-          <Navber />
-          <MobileNav/>
+    // <SideBarProvider>
+    //   <div className="h-full">
+    //     <div className="hidden h-full md:flex md:flex-col md:fixed md:inset-y-0 bg-gray-900">
+    //       <Sidebar  />
+    //     </div>
+    //     <main className="">
+    //       <Navber />
+    //       <MobileNav/>
+    //       {children}
+    //     </main>
+    //   </div>
+    // </SideBarProvider>
+    <>
+    <main className="root">
+      <Sidebar/>
+      <MobileNav/>
+
+      <div className="root-container">
+        <div className="wrapper">
           {children}
-          <Toaster />
-        </main>
-      </div>
-    </SideBarProvider>
+        </div>
+</div>
+    </main>
+    </>
   );
 };
 

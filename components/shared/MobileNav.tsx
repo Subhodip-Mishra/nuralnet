@@ -13,7 +13,7 @@ import Image from 'next/image'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { navLinks } from '@/app/constants'
 import { usePathname } from 'next/navigation'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 
 const MobileNav = () => {
     const pathname = usePathname()
