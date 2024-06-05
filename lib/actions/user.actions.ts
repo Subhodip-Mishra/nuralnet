@@ -21,7 +21,7 @@ export async function getUserById(userId: string) {
   try {
     await connectToDatabase();
 
-    const user = await User.findOne({ clerakId: userId });
+    const user = await User.findOne({ clerkId: userId });
 
     if (!user) throw new Error("User not foundasdf");
 
@@ -32,11 +32,11 @@ export async function getUserById(userId: string) {
 }
 
 // UPDATE
-export async function updateUser(clerakId: string, user: UpdateUserParams) {
+export async function updateUser(clerkId: string, user: UpdateUserParams) {
   try {
     await connectToDatabase();
 
-    const updatedUser = await User.findOneAndUpdate({ clerakId }, user, {
+    const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
       new: true,
     });
 
@@ -49,12 +49,12 @@ export async function updateUser(clerakId: string, user: UpdateUserParams) {
 }
 
 // DELETE
-export async function deleteUser(clerakId: string) {
+export async function deleteUser(clerkId: string) {
   try {
     await connectToDatabase();
 
     // Find user to delete
-    const userToDelete = await User.findOne({ clerakId });
+    const userToDelete = await User.findOne({ clerkId });
 
     if (!userToDelete) {
       throw new Error("User not found");
