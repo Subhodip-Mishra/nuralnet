@@ -224,7 +224,11 @@
   }
 
   .home-heading {
-    @apply h1-semibold max-w-[500px] flex-wrap text-center text-white shadow-sm;
+    @apply h1-semibold max-w-[600px] flex-wrap text-center text-white shadow-sm  ;
+  }
+
+  .color{
+    @apply animate-in
   }
 
   /* Credits Page */
@@ -324,7 +328,7 @@
   }
 
   .sidebar-nav_elements {
-    @apply hidden w-full flex-col items-start md:flex;
+    @apply hidden w-full flex-col items-start md:flex ;
   }
 
   .sidebar-nav_element {

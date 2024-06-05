@@ -4,11 +4,11 @@ import Sidebar from "@/components/shared/Sidebar";
 const DashBoardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <main className="root">
+      <main className="root ">
         <Sidebar />
         <MobileNav />
 
-        <div className="root-container">
+        <div className="root-container ">
           <div className="wrapper">
             {children}
           </div>
