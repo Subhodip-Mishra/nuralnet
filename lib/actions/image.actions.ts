@@ -272,7 +272,7 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
         const resourcesIds = resources.map((resource: any) => resource.public_id);
 
         let query = {};
-
+ 
         if (searchQuery) {
             query = {
                 publicId: {
