@@ -12,6 +12,8 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
 
   // check here some issue face in clerk 
   if (!userId) redirect('/sign-in')
+
+
   const user = await getUserById(userId);
   return (
     <>
