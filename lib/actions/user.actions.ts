@@ -1,11 +1,11 @@
 "use server"
 import { revalidatePath } from "next/cache";
 import User from "@/lib/database/models/users.models"
-import { connectToDatabase } from "@/lib/database/Mongoose";
+import { connectToDatabase } from "@/lib/database/mongoose";
 import { handleError } from "@/lib/utils";
 
 // CREATE
-export async function createUser(user: CreateUserParams) {
+export async function createUser(user: any) {
   try {
     await connectToDatabase();
     const newUser = await User.create(user);
